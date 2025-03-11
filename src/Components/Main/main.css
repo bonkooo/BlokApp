@@ -24,7 +24,7 @@
 .status-text {
     margin-top: 10px;
     font-size: 18px;
-    color: #A82431;
+    color: #be1a2a;
 }
 
 .app-description {
@@ -37,4 +37,8 @@
     font-size: 18px;
     line-height: 1.6;
     width: 100%;
+}
+
+.app-description h2{
+    color: white;
 }

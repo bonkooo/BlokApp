@@ -1,4 +1,5 @@
 import React from 'react';
+import './Global.css';
 import {HashRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './Pages/home.jsx';
 import Login from './Pages/login.jsx';
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/ChatsMenu" element={<Chat />} />
         <Route path="/assignments" element={<Assignments />} />
         <Route path = "/redari" element={<Redari />} />
         <Route path = "/test" element={<Test />} />

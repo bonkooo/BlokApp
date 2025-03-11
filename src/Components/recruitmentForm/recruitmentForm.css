@@ -1,0 +1,50 @@
+.recruitment-form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+    color: #FAF3F0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #FAF3F0;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #FAF3F0;
+}
+
+button {
+    background-color: #A82431;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #8b1e29;;
+}

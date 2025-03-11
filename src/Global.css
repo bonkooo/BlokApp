@@ -1,0 +1,6 @@
+body {
+    background-image: url('/src/Assets/studenti.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
