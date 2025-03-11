@@ -1,0 +1,7 @@
+.main-chat-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3rem;
+    margin-left: 30rem;
+  }
