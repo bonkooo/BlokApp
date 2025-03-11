@@ -1,55 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import './ChatsMenu.css';
-import defaultIcon from '../../Assets/default-group.png'
-import rgbIcon from '../../Assets/rgb.png'
-import miaIcon from '../../Assets/motivation.png'
-import logIcon from '../../Assets/logistics.png'
-import comIcon from '../../Assets/communication.png'
+import defaultIcon from '../../Assets/default-group.png';
+import rgbIcon from '../../Assets/rgb.png';
+import miaIcon from '../../Assets/motivation.png';
+import logIcon from '../../Assets/logistics.png';
+import comIcon from '../../Assets/communication.png';
+
+// Mapping chat names to corresponding icons
+const iconMap = {
+    'SigurnostChat': rgbIcon,
+    'MiA Chat': miaIcon,
+    'Logistika Chat': logIcon,
+    'Komunikacije Chat': comIcon,
+    'Diskusija Chat': defaultIcon
+};
 
 const ChatsMenu = () => {
+    const [groups, setGroups] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const [groups, setGroups] = useState({
-        Javna: true,
-        Bezbednost: true,
-        MIA: true,
-        Logistika: true,
-        Komunikacije: true
-    });
+    useEffect(() => {
+        fetch('http://192.168.255.63:4000/chats', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + window.sessionStorage.getItem("token"), // Replace with actual token
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setGroups(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                setError(error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error loading chats: {error.message}</div>;
 
     return (
         <div className="chats-menu">
             <h2>Tvoji četovi</h2>
             <hr />
-            {groups.Javna && (
-                <div className="chat-card">
-                    <img src={defaultIcon} alt="Default Group" className="chat-card-image" />
-                    <span className="chat-card-name">Javni čet</span>
+            {groups.map(group => (
+                <div key={group.idChat} className="chat-card">
+                    <img 
+                        src={iconMap[group.chatName] || defaultIcon} 
+                        alt={group.chatName} 
+                        className="chat-card-image" 
+                    />
+                    <span className="chat-card-name">{group.chatName}</span>
                 </div>
-            )}
-            {groups.Bezbednost && (
-                <div className="chat-card">
-                    <img src={rgbIcon} alt="Group 1" className="chat-card-image" />
-                    <span className="chat-card-name">Bezbednost</span>
-                </div>
-            )}
-            {groups.MIA && (
-                <div className="chat-card">
-                    <img src={miaIcon} alt="Group 2" className="chat-card-image" />
-                    <span className="chat-card-name">Motivacija i Agitacija</span>
-                </div>
-            )}
-            {groups.Logistika && (
-                <div className="chat-card">
-                    <img src={logIcon} alt="Group 3" className="chat-card-image" />
-                    <span className="chat-card-name">Logistika</span>
-                </div>
-            )}
-            {groups.Komunikacije && (
-                <div className="chat-card">
-                    <img src={comIcon} alt="Group 4" className="chat-card-image" />
-                    <span className="chat-card-name">Komunikacije</span>
-                </div>
-            )}
+            ))}
         </div>
     );
 };
