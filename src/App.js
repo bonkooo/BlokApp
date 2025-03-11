@@ -7,7 +7,7 @@ import Chat from './Pages/chat.jsx'
 import Assignments from './Pages/assignments.jsx'
 import Redari from './Pages/redari.jsx'
 import Test from './Pages/test.jsx'
-import Rewards from './Pages/rewards.jsx'
+import Profile from './Pages/profile.jsx'
 import News from './Pages/news.jsx'
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/assignments" element={<Assignments />} />
         <Route path = "/redari" element={<Redari />} />
         <Route path = "/test" element={<Test />} />
-        <Route path = "/rewards" element={<Rewards />} />
+        <Route path = "/profile" element={<Profile />} />
         <Route path = "/news" element={<News />} />
       </Routes>
     </Router>

@@ -9,24 +9,46 @@ import axios from 'axios';
 export const Signup = () => {
     const [action, setAction] = useState("Sign up");
     const [email, setEmail] = useState("");  // Initialized as empty string
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
 
     function handleSubmit(event) {
-        event.preventDefault();
-        
-        if (!email || !password) {
-            console.log("Email and password are required!");
-            return;
+        if (action === "Sign up") {
+            event.preventDefault();
+       
+            if (!email || !password || !name) {
+                console.log("Email, password and name are required!");
+                return;
+            }
+
+            console.log("Sending request to backend...");
+            console.log("Sending: " + email + " " + password + " " + name);
+
+            axios.post('http://192.168.255.63:4000/register', { username: name, email: email, password: password })
+            .then(res => window.sessionStorage.setItem('token', res.data.accessToken))
+            .catch(err => console.error("Error:", err));
+
+        } else if (action === "Log in") {
+            event.preventDefault();
+       
+            if (!email || !password) {
+                console.log("Email and password are required!");
+                return;
+            }
+
+            console.log("Sending request to backend...");
+            console.log("Sending: " + email + " " + password + " " + name);
+
+            axios.post('http://192.168.255.63:4000/login', { username: email, password: password })
+            .then(res => window.sessionStorage.setItem('token', res.data.accessToken))
+            .catch(err => {
+                console.error("Error:", err)
+                alert("Invalid user or password.")
+            });
         }
+       
 
-        console.log("Sending request to backend...");
-        console.log(email, password);
-
-        axios.post('http://192.168.255.63:4000/login', { username: email, password: password })
-        .then(res => window.sessionStorage.setItem('token', res.data.accessToken))
-        .catch(err => console.error("Error:", err));
-
-        
+       
     }
 
     const handleLoginClick = (e) => {
@@ -55,7 +77,7 @@ export const Signup = () => {
             <div className="input">
                 <img src={email_icon} alt="" />
                 <input 
-                    type="email" 
+                    type="text" 
                     placeholder="peraperic@mail.dom" 
                     value={email} 
                     onChange={e => setEmail(e.target.value)}
@@ -76,8 +98,8 @@ export const Signup = () => {
             <div className="submit-container">
                 <button 
                     className={action === "Sign up" ? "submit" : "submit gray"} 
-                    type="button"
-                    onClick={() => setAction("Sign up")}
+                    type="submit"
+                    onClick={handleLoginClick}
                 >
                     Registruj se
                 </button>
