@@ -4,6 +4,10 @@ import Home from './Pages/home.jsx';
 import Login from './Pages/login.jsx';
 import Chat from './Pages/chat.jsx'
 import Assignments from './Pages/assignments.jsx'
+import Redari from './Pages/redari.jsx'
+import Test from './Pages/test.jsx'
+import Rewards from './Pages/rewards.jsx'
+import News from './Pages/news.jsx'
 
 function App() {
   return (
@@ -13,7 +17,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/assignments" element={<Assignments />} />
-        
+        <Route path = "/redari" element={<Redari />} />
+        <Route path = "/test" element={<Test />} />
+        <Route path = "/rewards" element={<Rewards />} />
+        <Route path = "/news" element={<News />} />
       </Routes>
     </Router>
   );

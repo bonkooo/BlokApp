@@ -77,38 +77,19 @@
 .navBtns {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
     font-size: 18px;
     align-items: center;
     flex-wrap: nowrap; /* Prevents items from wrapping */
 }
 
-/* Call-to-Action Button */
-.cta-button {
-    margin-left: 0px;
-    display: flex;
-    justify-content: space-around;
-    background-color: #ABB1A9; /* Red Button */
-    color: #A82431;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-}
+/* Login button */
 
-/* Apply Icon */
-.cta-button .applyIcon {
-    height: 30px;
-    width: auto;
-    margin-right: 10px;
-}
-
-.cta-button:hover {
+.login-btn{
     background-color: #41443f; /* Darker red on hover */
     transform: scale(1.05); /* Slight pop effect */
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -121,10 +102,6 @@
     .nav-links {
         flex-direction: column;
         gap: 10px;
-        margin-top: 10px;
-    }
-
-    .cta-button {
         margin-top: 10px;
     }
 }

@@ -2,26 +2,29 @@ import React from 'react';
 import './header.css';
 import logo from '../../Assets/logo.png';
 import applyIcon from '../../Assets/applyIcon.png';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src={logo} alt="" />
+                <Link to="/">
+                    <img src={logo} alt="" />
+                </Link>
             </div>
             <div className="navBtns">
-                <div className="nav-btn">Moji četovi</div>
-                <div className="nav-btn">Zaduženja</div>
-                <div className="nav-btn">Redarstva</div>
-                <div className="nav-btn">Test ličnosti</div>
-                <div className="nav-btn">Nagrade</div>
-                <div className="nav-btn">Vesti</div>
+                <Link to="/chat" className="nav-btn">Moji četovi</Link>
+                <Link to="/assigments" className="nav-btn">Zaduženja</Link>
+                <Link to="/redari" className="nav-btn">Redarstva</Link>
+                <Link to="/test" className="nav-btn">Test ličnosti</Link>
+                <Link to="/rewards" className="nav-btn">Nagrade</Link>
+                <Link to="/news" className="nav-btn">Vesti</Link>
+                <Link to="/login" className='nav-btn login-btn'>Prijava ✔️</Link>
             </div>
             <div className="cta-button">
-                <img className='applyIcon' src={applyIcon} alt="" />
-                <h1 className='ctaText'>Prijava</h1>
-                </div>
+                
+            </div>
         </header>
     );
 };
