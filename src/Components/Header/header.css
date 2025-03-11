@@ -1,0 +1,98 @@
+/* Header Styling */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    margin-top: 10px;;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #141414; /* Dark background */
+    padding: 15px 30px;
+    border-radius: 12px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 1200px; /* Keeps it centered on large screens */
+    margin: 0 auto; /* Center alignment */
+    z-index: 1000;
+}
+
+/* Logo */
+.logo img {
+    height: 40px; /* Adjust as needed */
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #ABB1A9; /* Light grayish-green */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #A82431; /* Reddish hover effect */
+}
+
+/* Navigation Button */
+.nav-btn {
+    width: 35px;
+    height: 35px;
+    padding: 10px;
+    background-color: #A82431; /* Red Button */
+    border: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Light up effect */
+    border-radius: 50%; /* Circular button */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.nav-btn:hover {
+    background-color: #8b1e29; /* Darker red on hover */
+    transform: scale(1.1); /* Slight scaling effect */
+}
+
+/* Call-to-Action Button */
+.cta-button {
+    background-color: #A82431; /* Red Button */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.cta-button:hover {
+    background-color: #8b1e29; /* Darker red on hover */
+    transform: scale(1.05); /* Slight pop effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .cta-button {
+        margin-top: 10px;
+    }
+}
