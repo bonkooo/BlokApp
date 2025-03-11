@@ -20,6 +20,7 @@ export const Signup = () => {
         }
 
         console.log("Sending request to backend...");
+        console.log(email, password);
 
         axios.post('http://192.168.255.63:4000/login', { username: email, password: password })
         .then(res => window.sessionStorage.setItem('token', res.data.accessToken))

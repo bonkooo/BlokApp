@@ -23,17 +23,25 @@ h2 {
 
 .question p {
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .option {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: #ABB1A9;
     color: #141414;
-    padding: 10px;
+    padding: 12px 15px;
     margin: 5px 0;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 16px;
+    height: 50px; /* Ensures all options have the same height */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if text overflows */
 }
 
 .option:hover {
@@ -41,8 +49,16 @@ h2 {
     color: white;
 }
 
+.option span {
+    flex-grow: 1;
+    text-align: left;
+}
+
 input[type="radio"] {
-    margin-right: 10px;
+    margin-left: 15px;
+    cursor: pointer;
+    transform: scale(1.2);
+    flex-shrink: 0; /* Ensures radio button stays at the same position */
 }
 
 .submit-btn {
