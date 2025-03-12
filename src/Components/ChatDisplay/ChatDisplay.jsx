@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./ChatDisplay.css";
 import axios from "axios";
 
 const ChatDisplay = ({ chatId }) => {
-    const [messages, setMessages] = useState([]); // Always initialize as an array
+    const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const [userData, setUserData] = useState(null); // Store user data
+    const [userData, setUserData] = useState(null);
+
+    const chatBoxRef = useRef(null); // Create a reference for the chat box
 
     // Function to fetch user data and messages
     const fetchUserDataAndMessages = async () => {
@@ -23,7 +25,7 @@ const ChatDisplay = ({ chatId }) => {
                         }
                     }
                 );
-                setUserData(userResponse.data); // Store user data
+                setUserData(userResponse.data);
             }
 
             // Fetch chat messages
@@ -38,7 +40,6 @@ const ChatDisplay = ({ chatId }) => {
                 }
             );
 
-            // Extract messages and store usernames
             const formattedMessages = response.data.map(msg => ({
                 sender: msg.sender || "unknown",
                 idSender: msg.idSender,
@@ -49,33 +50,35 @@ const ChatDisplay = ({ chatId }) => {
             setMessages(formattedMessages);
         } catch (error) {
             console.error("Error fetching data:", error);
-            setMessages([]); // Set empty messages if API call fails
+            setMessages([]);
         }
     };
 
-    // Fetch messages every 2 seconds
+    // Fetch messages every 600ms
     useEffect(() => {
         if (!chatId) return;
 
-        // Initial fetch
         fetchUserDataAndMessages();
 
-        // Set interval to fetch messages every 2000ms
         const interval = setInterval(fetchUserDataAndMessages, 600);
 
-        // Cleanup interval when component unmounts or chatId changes
         return () => clearInterval(interval);
-    }, [chatId]); // Runs when chatId changes
+    }, [chatId]);
+
+    // Auto-scroll to bottom when messages update
+    useEffect(() => {
+        if (chatBoxRef.current) {
+            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     const sendMessage = async () => {
         if (newMessage.trim() === "" || !chatId || !userData) return;
 
         const newMsg = { sender: "user", idSender: userData.idUser, text: newMessage, username: "You" };
 
-        // Update UI immediately
         setMessages(prevMessages => [...prevMessages, newMsg]);
 
-        // Send message to backend
         try {
             await axios.post(
                 `http://192.168.255.63:4000/send_message`,
@@ -94,12 +97,12 @@ const ChatDisplay = ({ chatId }) => {
             console.error("Error sending message:", error);
         }
 
-        setNewMessage(""); // Clear input field
+        setNewMessage("");
     };
 
     return (
         <div className="chat-container">
-            <div className="chat-box">
+            <div className="chat-box" ref={chatBoxRef}>
                 {messages.length > 0 ? (
                     messages.map((msg, index) => {
                         const isUser = msg.idSender === userData?.idUser;
