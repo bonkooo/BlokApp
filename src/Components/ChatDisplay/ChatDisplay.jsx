@@ -7,13 +7,13 @@ const ChatDisplay = ({ chatId }) => {
     const [newMessage, setNewMessage] = useState("");
     const [userData, setUserData] = useState(null); // Store user data
 
-    // Fetch user data and messages when a new chat is selected
-    useEffect(() => {
+    // Function to fetch user data and messages
+    const fetchUserDataAndMessages = async () => {
         if (!chatId) return;
 
-        const fetchUserDataAndMessages = async () => {
-            try {
-                // Fetch user data
+        try {
+            // Fetch user data only once
+            if (!userData) {
                 const userResponse = await axios.get(
                     `http://192.168.255.63:4000/user_info`,
                     {
@@ -24,36 +24,48 @@ const ChatDisplay = ({ chatId }) => {
                     }
                 );
                 setUserData(userResponse.data); // Store user data
-
-                // Fetch chat messages
-                const response = await axios.post(
-                    `http://192.168.255.63:4000/chat_messages`,
-                    { idChat: chatId },
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
-                            'Content-Type': 'application/json'
-                        }
-                    }
-                );
-
-                // Extract messages and store usernames
-                const formattedMessages = response.data.map(msg => ({
-                    sender: msg.sender || "unknown",
-                    idSender: msg.idSender,
-                    text: msg.messageText || "",
-                    username: msg.username || "Unknown" // Store username directly from API
-                }));
-
-                setMessages(formattedMessages);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                setMessages([]); // Set empty messages if API call fails
             }
-        };
 
+            // Fetch chat messages
+            const response = await axios.post(
+                `http://192.168.255.63:4000/chat_messages`,
+                { idChat: chatId },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            // Extract messages and store usernames
+            const formattedMessages = response.data.map(msg => ({
+                sender: msg.sender || "unknown",
+                idSender: msg.idSender,
+                text: msg.messageText || "",
+                username: msg.username || "Unknown"
+            }));
+
+            setMessages(formattedMessages);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setMessages([]); // Set empty messages if API call fails
+        }
+    };
+
+    // Fetch messages every 2 seconds
+    useEffect(() => {
+        if (!chatId) return;
+
+        // Initial fetch
         fetchUserDataAndMessages();
-    }, [chatId]);
+
+        // Set interval to fetch messages every 2000ms
+        const interval = setInterval(fetchUserDataAndMessages, 600);
+
+        // Cleanup interval when component unmounts or chatId changes
+        return () => clearInterval(interval);
+    }, [chatId]); // Runs when chatId changes
 
     const sendMessage = async () => {
         if (newMessage.trim() === "" || !chatId || !userData) return;
@@ -69,7 +81,7 @@ const ChatDisplay = ({ chatId }) => {
                 `http://192.168.255.63:4000/send_message`,
                 {
                     idChat: chatId,
-                    messageText: newMessage  // Ensure messageText is used in request
+                    messageText: newMessage
                 },
                 {
                     headers: {
