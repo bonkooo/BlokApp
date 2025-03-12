@@ -91,7 +91,7 @@ const ChatDisplay = ({ chatId }) => {
                 {messages.length > 0 ? (
                     messages.map((msg, index) => {
                         const isUser = msg.idSender === userData?.idUser;
-                        const senderName = isUser ? "You" : msg.username;
+                        const senderName = isUser ? "" : msg.username;
 
                         return (
                             <div key={index} className="message-container">
