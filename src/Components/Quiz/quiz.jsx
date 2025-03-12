@@ -63,12 +63,13 @@ const Quiz = () => {
                     <p>{q.question}</p>
                     {q.options.map(option => (
                         <label key={option.text} className="option">
-                            <span>{option.text}</span>
                             <input 
                                 type="radio" 
                                 name={`question-${index}`} 
                                 onChange={() => handleAnswer(index, option.group)}
                             />
+                            <span>{option.text}</span>
+                            
                         </label>
                     ))}
                 </div>

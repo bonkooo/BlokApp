@@ -23,13 +23,15 @@ export const Signup = () => {
 
             try {
                 const res = await axios.post('http://192.168.255.63:4000/register', {
-                    username: name,
-                    email: email,
+                    username: email,
+                    email: name,
                     password: password
                 });
 
                 window.sessionStorage.setItem('token', res.data.accessToken);
-                window.location.href = '/'; // Redirect to home page after successful registration
+                // window.location.href = '/'; // Redirect to home page after successful registration
+                setAction("Log in");
+                alert("Registration successful. Please log in.");
             } catch (err) {
                 console.error("Error:", err);
                 alert("Registration failed. Please try again.");
@@ -66,6 +68,13 @@ export const Signup = () => {
             // setName("");
         }
     };
+    const handleLoginClickSignup = (e) => {
+        if (action !== "Sign up") {
+            e.preventDefault();
+            setAction("Sign up");
+            
+        }
+    };
 
     return (
         <div className="container">
@@ -81,7 +90,7 @@ export const Signup = () => {
                         <img src={user_icon} alt="" />
                         <input 
                             type="text" 
-                            placeholder="Pera Peric" 
+                            placeholder="Ime i prezime" 
                             value={name} 
                             onChange={e => setName(e.target.value)}
                         />
@@ -91,7 +100,7 @@ export const Signup = () => {
                     <img src={email_icon} alt="" />
                     <input 
                         type="text" 
-                        placeholder="peraperic@mail.dom" 
+                        placeholder="Korisničko ime" 
                         value={email} 
                         onChange={e => setEmail(e.target.value)}
                     />
@@ -112,6 +121,7 @@ export const Signup = () => {
                     <button 
                         className={action === "Sign up" ? "submit" : "submit gray"} 
                         type="submit"
+                        onClick={handleLoginClickSignup}
                     >
                         Registruj se
                     </button>

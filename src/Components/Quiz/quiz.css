@@ -55,10 +55,14 @@ h2 {
 }
 
 input[type="radio"] {
-    margin-left: 15px;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.8rem;
     cursor: pointer;
     transform: scale(1.2);
     flex-shrink: 0; /* Ensures radio button stays at the same position */
+    accent-color: #A82431
 }
 
 .submit-btn {
@@ -81,3 +85,5 @@ input[type="radio"] {
     font-size: 18px;
     font-weight: bold;
 }
+
+

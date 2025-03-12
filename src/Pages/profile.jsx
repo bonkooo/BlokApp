@@ -14,7 +14,7 @@ function Profile() {
     prezime="Marković" 
     fakultet="ETF Beograd" 
     brojIndeksa="2023/0203" 
-    radnaGrupa="Gay I"
+    radnaGrupa="Bezbednost"
 />
     <Footer/>
     </>
