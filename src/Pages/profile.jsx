@@ -10,10 +10,10 @@ function Profile() {
     <Header/>
     <Awards completedAssignments={11}/>
     <UserInfo 
-    ime="David Manojlo" 
-    prezime="Marković" 
-    fakultet="ETF Beograd" 
-    brojIndeksa="2023/0203" 
+    ime="Pera" 
+    prezime="Peric" 
+    fakultet="ETF" 
+    brojIndeksa="2023/0001" 
     radnaGrupa="Bezbednost"
 />
     <Footer/>

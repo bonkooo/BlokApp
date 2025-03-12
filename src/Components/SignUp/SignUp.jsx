@@ -87,17 +87,17 @@ export const Signup = () => {
             <form onSubmit={handleSubmit} className="inputs">
                 {action === "Sign up" && (
                     <div className="input">
-                        <img src={user_icon} alt="" />
+                        <img src={email_icon} alt="" />
                         <input 
                             type="text" 
-                            placeholder="Ime i prezime" 
+                            placeholder="Email" 
                             value={name} 
                             onChange={e => setName(e.target.value)}
                         />
                     </div>
                 )}
                 <div className="input">
-                    <img src={email_icon} alt="" />
+                    <img src={user_icon} alt="" />
                     <input 
                         type="text" 
                         placeholder="Korisničko ime" 
