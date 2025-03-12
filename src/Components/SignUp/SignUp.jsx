@@ -8,112 +8,123 @@ import axios from 'axios';
 
 export const Signup = () => {
     const [action, setAction] = useState("Sign up");
-    const [email, setEmail] = useState("");  // Initialized as empty string
+    const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
 
-    function handleSubmit(event) {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
         if (action === "Sign up") {
-            event.preventDefault();
-       
             if (!email || !password || !name) {
-                console.log("Email, password and name are required!");
+                alert("Email, password, and name are required!");
                 return;
             }
 
-            console.log("Sending request to backend...");
-            console.log("Sending: " + email + " " + password + " " + name);
+            try {
+                const res = await axios.post('http://192.168.255.63:4000/register', {
+                    username: name,
+                    email: email,
+                    password: password
+                });
 
-            axios.post('http://192.168.255.63:4000/register', { username: name, email: email, password: password })
-            .then(res => window.sessionStorage.setItem('token', res.data.accessToken))
-            .catch(err => console.error("Error:", err));
-
-        } else if (action === "Log in") {
-            event.preventDefault();
-       
+                window.sessionStorage.setItem('token', res.data.accessToken);
+                window.location.href = '/'; // Redirect to home page after successful registration
+            } catch (err) {
+                console.error("Error:", err);
+                alert("Registration failed. Please try again.");
+            }
+        } 
+        
+        else if (action === "Log in") {
             if (!email || !password) {
-                console.log("Email and password are required!");
+                alert("Email and password are required!");
                 return;
             }
 
-            console.log("Sending request to backend...");
-            console.log("Sending: " + email + " " + password + " " + name);
+            try {
+                const res = await axios.post('http://192.168.255.63:4000/login', {
+                    username: email, // Assuming backend uses email as username
+                    password: password
+                });
 
-            axios.post('http://192.168.255.63:4000/login', { username: email, password: password })
-            .then(res => window.sessionStorage.setItem('token', res.data.accessToken))
-            .catch(err => {
-                console.error("Error:", err)
-                alert("Invalid user or password.")
-            });
+                window.sessionStorage.setItem('token', res.data.accessToken);
+                window.location.href = '/'; // Redirect to home page after successful login
+            } catch (err) {
+                console.error("Error:", err);
+                alert("Invalid username or password.");
+            }
         }
-       
-
-       
-    }
+    };
 
     const handleLoginClick = (e) => {
         if (action !== "Log in") {
             e.preventDefault();
-            setAction("Log in"); // Switch to login mode
-        } 
+            setAction("Log in");
+            // setEmail("");
+            // setPassword("");
+            // setName("");
+        }
     };
 
     return (
-    <div className="container">
-        <div className="header-signup">
-            <img src={logo}  alt="Logo" className="logo" />
-            <div className="text">{action === "Sign up" ? "Registruj se" : "Prijavi se"}</div>
-            <div className="underline"></div>
-        </div>
+        <div className="container">
+            <div className="header-signup">
+                <img src={logo} alt="Logo" className="logo" />
+                <div className="text">{action === "Sign up" ? "Registruj se" : "Prijavi se"}</div>
+                <div className="underline"></div>
+            </div>
 
-        {/* Add form submit event */}
-        <form onSubmit={handleSubmit} className="inputs">
-            {action === "Log in" ? null : (
+            <form onSubmit={handleSubmit} className="inputs">
+                {action === "Sign up" && (
+                    <div className="input">
+                        <img src={user_icon} alt="" />
+                        <input 
+                            type="text" 
+                            placeholder="Pera Peric" 
+                            value={name} 
+                            onChange={e => setName(e.target.value)}
+                        />
+                    </div>
+                )}
                 <div className="input">
-                    <img src={user_icon} alt="" />
-                    <input type="text" placeholder="Pera Peric" />
+                    <img src={email_icon} alt="" />
+                    <input 
+                        type="text" 
+                        placeholder="peraperic@mail.dom" 
+                        value={email} 
+                        onChange={e => setEmail(e.target.value)}
+                    />
                 </div>
-            )}
-            <div className="input">
-                <img src={email_icon} alt="" />
-                <input 
-                    type="text" 
-                    placeholder="peraperic@mail.dom" 
-                    value={email} 
-                    onChange={e => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="input">
-                <img src={password_icon} alt="" />
-                <input 
-                    type="password" 
-                    placeholder="********" 
-                    value={password} 
-                    onChange={e => setPassword(e.target.value)}
-                />
-            </div>
+                <div className="input">
+                    <img src={password_icon} alt="" />
+                    <input 
+                        type="password" 
+                        placeholder="********" 
+                        value={password} 
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                </div>
 
-            <div className="forgot-password">Zaboravljena šifra? <span id='clickHereBtn'>Kliknite ovde!</span></div>
-            
-            <div className="submit-container">
-                <button 
-                    className={action === "Sign up" ? "submit" : "submit gray"} 
-                    type="submit"
-                    onClick={handleLoginClick}
-                >
-                    Registruj se
-                </button>
+                <div className="forgot-password">Zaboravljena šifra? <span id='clickHereBtn'>Kliknite ovde!</span></div>
 
-                {/* Use type="submit" to allow form submission */}
-                <button 
-                    className={action === "Log in" ? "submit" : "submit gray"} 
-                    type="submit"
-                    onClick={handleLoginClick}
-                >
-                    Prijavi se
-                </button>
-            </div>
-        </form>
-    </div>
-  );
+                <div className="submit-container">
+                    <button 
+                        className={action === "Sign up" ? "submit" : "submit gray"} 
+                        type="submit"
+                    >
+                        Registruj se
+                    </button>
+
+                    <button 
+                        className={action === "Log in" ? "submit" : "submit gray"} 
+                        type="submit"
+                        onClick={handleLoginClick}
+                    >
+                        Prijavi se
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
 };
