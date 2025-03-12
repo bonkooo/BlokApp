@@ -9,7 +9,7 @@ function Chat() {
   return (
     <>
       <Header />
-      <NewsManager isAdmin={isAdmin} /> {/* Pass isAdmin as a prop */}
+      <NewsManager isAdmin={isAdmin} /> 
       <Footer />
     </>
   );

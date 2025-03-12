@@ -7,7 +7,7 @@ function Chat() {
   return (
     <>
     <Header/>
-    <RecruitmentForm/>
+    <RecruitmentForm isAdmin={true}/>
     <Footer/>
     </>
   );

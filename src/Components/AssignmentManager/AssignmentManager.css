@@ -1,4 +1,4 @@
-.news-container {
+.assignment-container {
     max-width: 600px;
     margin: auto;
     background: #141414;
@@ -11,21 +11,21 @@
     margin-bottom: 5rem;
 }
 
-/* Admin news submission form */
-.news-form {
+/* Admin form for adding assignments */
+.assignment-form {
     background: #ABB1A9;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
-.news-form h2 {
+.assignment-form h2 {
     color: #141414;
     margin-bottom: 10px;
 }
 
-.news-form input,
-.news-form textarea {
+.assignment-form input,
+.assignment-form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -36,12 +36,7 @@
     font-size: 14px;
 }
 
-.news-form textarea {
-    resize: vertical;
-    height: 80px;
-}
-
-.news-form button {
+.assignment-form button {
     background: #A82431;
     color: white;
     padding: 10px 15px;
@@ -52,37 +47,75 @@
     width: 100%;
 }
 
-.news-form button:hover {
+.assignment-form button:hover {
     background: #8F1C2B;
 }
 
-/* News list styling */
-.news-list {
+/* Assignment cards */
+.assignment-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.news-item {
+.assignment-card {
     background: #ABB1A9;
     padding: 15px;
     border-radius: 8px;
     text-align: left;
 }
 
-.news-title {
+.assignment-title {
     color: #A82431;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
-.news-meta {
+.assignment-meta {
     font-size: 12px;
     color: #333;
     margin-bottom: 10px;
 }
 
-.news-content {
+.assignment-description {
     color: #141414;
     font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.register-button {
+    background: #A82431;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.register-button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+.no-assignments {
+    color: #ABB1A9;
+    font-style: italic;
+}
+
+.assignment-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #FFFFFF;
+    color: #141414;
+    font-size: 14px;
+}
+
+.assignment-group {
+    font-size: 14px;
+    color: #141414;
+    margin-bottom: 10px;
 }

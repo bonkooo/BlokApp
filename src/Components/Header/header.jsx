@@ -15,7 +15,7 @@ const Header = () => {
             </div>
             <div className="navBtns">
                 <Link to="/ChatsMenu" className="nav-btn">Moji četovi</Link>
-                <Link to="/assigments" className="nav-btn">Zaduženja</Link>
+                <Link to="/Zaduzenja" className="nav-btn">Zaduženja</Link>
                 <Link to="/redari" className="nav-btn">Forme</Link>
                 <Link to="/test" className="nav-btn">Test ličnosti</Link>
                 <Link to="/profile" className="nav-btn">Profil</Link>
