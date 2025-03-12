@@ -15,16 +15,45 @@
 .chat-box {
     flex-grow: 2;
     overflow-y: auto;
-    padding: 15px; /* More padding inside the chat box */
+    padding: 15px;
     display: flex;
     flex-direction: column;
     width: 50rem;
 }
 
+/* Message container to hold sender label + message */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+/* Sender label */
+.message-sender {
+    font-size: 12px;
+    font-weight: bold;
+    color: #bbb;
+    margin-bottom: 3px;
+}
+
+/* Align sender labels */
+.message-sender.right {
+    align-self: flex-end;
+    text-align: right;
+    margin-right: 5rem;
+}
+
+.message-sender.left {
+    align-self: flex-start;
+    text-align: left;
+    margin-left: -1rem;
+}
+
+/* Messages */
 .message {
     max-width: 70%;
     padding: 14px 18px;
-    margin: 15px 0; /* Increased spacing between messages */
+    margin: 15px 0;
     border-radius: 12px;
     font-size: 16px;
     word-wrap: break-word;
@@ -34,14 +63,14 @@
     align-self: flex-end;
     background: #A82431;
     color: white;
-    margin-right: 5rem; /* Push user messages closer to the right border */
+    margin-right: 5rem;
 }
 
 .message.other {
     align-self: flex-start;
     background: #ABB1A9;
     color: #141414;
-    margin-left: -1rem; /* Push other messages closer to the left border */
+    margin-left: -1rem;
 }
 
 .chat-input {

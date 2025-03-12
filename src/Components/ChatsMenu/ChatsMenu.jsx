@@ -15,7 +15,7 @@ const iconMap = {
     'Diskusija Chat': defaultIcon
 };
 
-const ChatsMenu = () => {
+const ChatsMenu = ({ onChatSelect }) => {
     const [groups, setGroups] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ const ChatsMenu = () => {
         fetch('http://192.168.255.63:4000/chats', {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer ' + window.sessionStorage.getItem("token"), // Replace with actual token
+                'Authorization': 'Bearer ' + window.sessionStorage.getItem("token"),
                 'Content-Type': 'application/json'
             }
         })
@@ -52,7 +52,11 @@ const ChatsMenu = () => {
             <h2>Tvoji četovi</h2>
             <hr />
             {groups.map(group => (
-                <div key={group.idChat} className="chat-card">
+                <div 
+                    key={group.idChat} 
+                    className="chat-card" 
+                    onClick={() => onChatSelect(group.idChat)} // Fetch messages when clicked
+                >
                     <img 
                         src={iconMap[group.chatName] || defaultIcon} 
                         alt={group.chatName} 
