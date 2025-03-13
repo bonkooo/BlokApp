@@ -1,6 +1,6 @@
 # BlockApp  
 
-BlockApp is a **centralized, personalized** social network platform designed to **enhance communication and organization** for student working groups during student blockades. Unlike generic tools like Slack, BlockApp is **tailored to students' needs**, ensuring **efficient collaboration** through structured group communication, task management, and much more.  
+BlockApp is a **centralized, personalized** social network platform web application designed to **enhance communication and organization** for student working groups during student blockades. Unlike generic tools like Slack, BlockApp is **tailored to students' needs**, ensuring **efficient collaboration** through structured group communication, task management, and much more.  
 
 ## 🌟 Why BlockApp?  
 
@@ -38,14 +38,3 @@ BlockApp is a **centralized, personalized** social network platform designed to 
 🖥 **Frontend:** React  
 ⚙ **Backend:** Node.js (Express)  
 📊 **Database:** MySQL  
-
----
-
-## 🚀 Installation  
-
-  '''sh
-   git clone https://github.com/yourusername/BlockApp.git  
-   cd BlockApp  
-   npm install
-   npm start
-  '''
