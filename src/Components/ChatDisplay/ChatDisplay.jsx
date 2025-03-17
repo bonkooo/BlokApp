@@ -60,7 +60,7 @@ const ChatDisplay = ({ chatId }) => {
 
         fetchUserDataAndMessages();
 
-        const interval = setInterval(fetchUserDataAndMessages, 600);
+        const interval = setInterval(fetchUserDataAndMessages, 1500);
 
         return () => clearInterval(interval);
     }, [chatId]);

@@ -14,7 +14,7 @@ function Profile() {
     prezime="Peric" 
     fakultet="ETF" 
     brojIndeksa="2023/0001" 
-    radnaGrupa="Bezbednost"
+    radnaGrupa="MIA"
 />
     <Footer/>
     </>
